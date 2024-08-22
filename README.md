@@ -4,6 +4,14 @@
 
 This project consists of a series of API tools designed to interact with a customer order database. Each tool serves a distinct purpose, providing functionalities such as retrieving customer orders, suggesting additional purchases, and calculating total spend. These tools are built to streamline customer interactions by enabling efficient data retrieval and analysis based on specific customer requests.
 
+## Project Information
+
+Fine-Tuning with LoRA and Synthetic Data Generation
+In this project, I fine-tuned a model using Low-Rank Adaptation (LoRA) to enhance its performance on specific tasks related to customer order analysis. The synthetic data required for fine-tuning was generated using the LLaMA 3.1 70B model. This synthetic data mimics real-world customer interaction scenarios, enabling the model to better understand and respond to various queries.
+
+Integration with xLAM-1B Model
+The fine-tuned adapter, developed through LoRA, was merged with the original Salesforce xLAM-1B model using PEFT (Parameter-Efficient Fine-Tuning). This approach allowed us to maintain the robustness of the xLAM-1B model while incorporating the specialized capabilities of the LoRA-tuned adapter. This merged model is now deployed within the chatbot, enabling it to effectively handle diverse customer queries by leveraging both the pre-trained knowledge of the xLAM-1B model and the task-specific enhancements introduced through LoRA.
+
 ## Table of Contents
 
 - [Installation](#installation)
