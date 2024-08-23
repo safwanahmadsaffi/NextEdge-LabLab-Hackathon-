@@ -43,19 +43,19 @@ def load_model():
 
     compute_dtype = torch.float16
     attn_implementation = 'sdpa'
-    quantization_config = BitsAndBytesConfig(
-        load_in_8bit=True,
-        bnb_8bit_compute_dtype=compute_dtype,
-        bnb_8bit_use_double_quant=True,
-        bnb_8bit_quant_type="nf8",
-    )
+    # quantization_config = BitsAndBytesConfig(
+    #     load_in_8bit=True,
+    #     bnb_8bit_compute_dtype=compute_dtype,
+    #     bnb_8bit_use_double_quant=True,
+    #     bnb_8bit_quant_type="nf8",
+    # )
     adapter = "PavanDeepak/Peft_XLAM_toolcalling_db"
     model_name = "Salesforce/xLAM-1b-fc-r"
     tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=True)
-    print(f"Starting to load the model {model_name} into memory")
+    #print(f"Starting to load the model {model_name} into memory")
     model = AutoModelForCausalLM.from_pretrained(
         model_name,
-        quantization_config=quantization_config,
+        #quantization_config=quantization_config,
         torch_dtype=compute_dtype,
         device_map={"": 0},
         attn_implementation=attn_implementation,
