@@ -39,21 +39,36 @@ def connection_to_db():
     return conn
 
 
-def load_model():
-    torch.random.manual_seed(0)
+# def load_model():
+#     torch.random.manual_seed(0)
 
-    compute_dtype = torch.float16
-    attn_implementation = 'sdpa'
+#     compute_dtype = torch.float16
+#     attn_implementation = 'sdpa'
+#     adapter = "PavanDeepak/Peft_XLAM_toolcalling_db"
+#     model_name = "Salesforce/xLAM-1b-fc-r"
+#     tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=True)
+    
+#     # Load the model without GPU quantization
+#     model = AutoModelForCausalLM.from_pretrained(
+#         model_name,
+#         torch_dtype=compute_dtype,
+#         device_map={"": "cpu"}, 
+#         attn_implementation=attn_implementation,
+#     )
+#     model = PeftModel.from_pretrained(model, adapter)
+#     return model, tokenizer
+
+def load_model():
+    torch.random.manual_seed(0) 
+
     adapter = "PavanDeepak/Peft_XLAM_toolcalling_db"
     model_name = "Salesforce/xLAM-1b-fc-r"
     tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=True)
     
-    # Load the model without GPU quantization
     model = AutoModelForCausalLM.from_pretrained(
         model_name,
-        torch_dtype=compute_dtype,
-        device_map={"": "cpu"}, 
-        attn_implementation=attn_implementation,
+        torch_dtype=torch.float32,
+        attn_implementation='eager'  # Changed from 'sdpa' to 'eager' for CPU compatibility
     )
     model = PeftModel.from_pretrained(model, adapter)
     return model, tokenizer
